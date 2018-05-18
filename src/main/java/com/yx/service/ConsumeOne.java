@@ -24,7 +24,9 @@ public class ConsumeOne implements MessageListener {
         try {
             byte[] data = message.getBody();
             Person person = msgPack.read(data, Person.class);
-            System.out.println(person);
+            System.out.println(person.getId());
+            System.out.println(person.getName());
+            System.out.println(person.getAge());
         } catch (Exception e) {
             LogUtil.error(e);
         }

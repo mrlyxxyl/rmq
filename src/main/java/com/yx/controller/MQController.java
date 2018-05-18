@@ -21,14 +21,14 @@ public class MQController {
     @RequestMapping(value = "test_one")
     @ResponseBody
     public Map<String, Object> testOne() throws IOException {
-        mqProducer.sendDataToQueue("queue_one_key", new Person(1, "中国", 12));
+        mqProducer.sendObjectToQueue("queue_one_key", new Person(1, "中国", 12));
         return GenResult.SUCCESS.genResult();
     }
 
     @RequestMapping(value = "test_two")
     @ResponseBody
     public Map<String, Object> testTwo() {
-        mqProducer.sendDataToQueue("queue_two_key", "queue_two_value");
+        mqProducer.sendStringToQueue("queue_two_key", "queue_two_value");
         return GenResult.SUCCESS.genResult();
     }
 }

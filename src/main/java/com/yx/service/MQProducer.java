@@ -27,11 +27,19 @@ public class MQProducer {
     private AmqpTemplate amqpTemplate;
 
 
-    public void sendDataToQueue(String queueKey, Object object) {
+    public void sendObjectToQueue(String queueKey, Object object) {
         try {
             byte[] data = msgPack.write(object);
             Message message = new Message(data, properties);
             amqpTemplate.send(queueKey, message);
+        } catch (Exception e) {
+            LogUtil.error(e);
+        }
+    }
+
+    public void sendStringToQueue(String queueKey, String msg) {
+        try {
+            amqpTemplate.convertAndSend(queueKey, msg);
         } catch (Exception e) {
             LogUtil.error(e);
         }
